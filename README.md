@@ -151,7 +151,7 @@ let diaPosterior = holidaysTool.get_N_working_day(2,fecha,'+');
 [Instalación]: #instalation
 [Documentación]: #documentation
 [to_UTC]:#function_to_utc
-[is_holiday]:function_is_holiday
-[get_closest_work_day]:function_get_closest_work_day
-[get_N_working_day]:function_get_N_working_day
+[is_holiday]:#function_is_holiday
+[get_closest_work_day]:#function_get_closest_work_day
+[get_N_working_day]:#function_get_N_working_day
 [Changelog]: ./CHANGELOG.md
