@@ -5,12 +5,12 @@
 ## Tabla de contenidos
 
 1. [Introducción]
+2. [Instalación]
+3. [Documentación]
     * _[to_UTC]_
     * _[is_holiday]_
     * _[get_closest_work_day]_
     * _[get_N_working_day]_
-2. [Instalación]
-3. [Documentación]
 4. [Changelog]
 
 <a name="introduction"></a>
