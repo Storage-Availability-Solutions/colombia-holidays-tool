@@ -1,0 +1,25 @@
+{
+  "name": "colombia-holidays-tool",
+  "version": "1.0.0",
+  "description": "Herramienta para trabajar con días laborales en Colombia",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Storage-Availability-Solutions/colombia-holidays-tool.git"
+  },
+  "author": "Esteban Vanegas @esvanegas",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Storage-Availability-Solutions/colombia-holidays-tool/issues"
+  },
+  "homepage": "https://github.com/Storage-Availability-Solutions/colombia-holidays-tool#readme",
+  "dependencies": {
+    "colombia-holidays": "0.0.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
