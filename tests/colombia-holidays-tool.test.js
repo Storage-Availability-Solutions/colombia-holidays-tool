@@ -1,29 +1,31 @@
 //@ts-nocheck
-const holidaysTool = require('../index');
+const testDates = require('../mocks/dates');
+const {isHoliday, getClosestWorkDay, addBussinessDays} = require('../index');
 
-describe('Funciones publicas',()=>{
-    test('Obtener ultimo cuarto día laboral a partir del 2020-11-20 - Debería retornar 2020-11-13',()=>{
-        let date = holidaysTool.get_N_working_day(4,utcdate(new Date('2020-11-20')));
-        expect(date).toMatchObject(utcdate(new Date('2020-11-13')));
-    });
-    test('Obtener ultimo cuarto día laboral a partir del 2020-12-22 - Debería retornar 2020-12-18',()=>{
-        let date = holidaysTool.get_N_working_day(2,utcdate(new Date('2020-12-22')));
-        expect(date).toMatchObject(utcdate(new Date('2020-12-18')));
-    });
-    test('Obtener ultimo cuarto día laboral a partir del 2020-01-22 - Debería retornar 2020-01-16',()=>{
-        let date = holidaysTool.get_N_working_day(4,utcdate(new Date('2020-01-22')));
-        expect(date).toMatchObject(utcdate(new Date('2020-01-16')));
-    });
-    test('Obtener ultimo segundo día laboral a partir del 2020-01-22 - Debería retornar 2020-01-20',()=>{
-        let date = holidaysTool.get_N_working_day(2,utcdate(new Date('2020-01-22')));
-        expect(date).toMatchObject(utcdate(new Date('2020-01-20')));
-    });
-    test('La fecha 2020-11-16 es un día laboral? - Debería retornar true',()=>{
-        let is_holiday = holidaysTool.is_holiday(utcdate(new Date('2020-11-16')));
-        expect(is_holiday).toBe(true);
-    });
-})
+describe('isHoliday', () => {
+  it('Test 8th december 2020 holiday - Should return true ', () => {
+    const holiday = isHoliday(testDates.holiday);
+    expect(holiday).toBe(true);
+  });
+  it('Test 10 september 2020 not holiday - Should return false ', () => {
+    const holiday = isHoliday(testDates.notHoliday);
+    expect(holiday).toBe(false);
+  });
+  it('Test 20 July 2020 not holiday - Should return false', () => {
+    const holiday = isHoliday(testDates.mondayWithHolidayOnTuesday);
+    console.log(testDates.mondayWithHolidayOnTuesday.getDate());
+    expect(holiday).toBe(false);
+  });
+  it('Test 11th November 2020 sunday - Should return true', () => {
+    const holiday = isHoliday(testDates.sundayWithHolidayOnMonday);
+    expect(holiday).toBe(true);
+  });
+});
 
-function utcdate(date){
-    return holidaysTool.to_UTC(date);
-}
+describe('getClosestWorkDay', () => {
+  it('', () => {});
+});
+
+describe('addBussinessDays', () => {
+  it('', () => {});
+});
