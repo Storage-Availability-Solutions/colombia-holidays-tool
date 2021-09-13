@@ -968,7 +968,7 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-colombia-holidays@0.0.1:
+colombia-holidays@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/colombia-holidays/-/colombia-holidays-0.0.1.tgz#77a028669f74b48efe666d8f748cc7142146398a"
   integrity sha1-d6AoZp90tI7+Zm2PdIzHFCFGOYo=
