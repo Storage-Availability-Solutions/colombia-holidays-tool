@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: szenius/set-timezone@v1.0
       with:
-        node-version: ${{ matrix.node-version }}
+        timezoneLinux: "Asia/Singapore"
     - run: yarn install
     - run: yarn test
