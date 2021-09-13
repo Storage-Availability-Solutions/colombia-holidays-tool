@@ -17,6 +17,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: szenius/set-timezone@v1.0
       with:
-        timezoneLinux: "Asia/Singapore"
-    - run: yarn install
-    - run: yarn test
+        timezoneLinux: "America/Bogota"
+    - run: date
+    - run: npm ci
+    - run: npm test
