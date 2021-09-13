@@ -19,5 +19,5 @@ jobs:
       with:
         timezoneLinux: "America/Bogota"
     - run: date
-    - run: npm ci
-    - run: npm test
+    - run: yarn install
+    - run: yarn test
