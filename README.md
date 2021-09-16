@@ -12,6 +12,7 @@
     * _[get_closest_work_day]_
     * _[get_N_working_day]_
 4. [Changelog]
+5. [Authors]
 
 <a name="introduction"></a>
 
@@ -57,13 +58,15 @@ Retorna la fecha en formato UTC pero con el timezone actual.
 ```javascript
 let fecha = new Date();
 // Sun Nov 29 2020 10:00:00 GMT-0500 (hora estándar de Colombia)
+// Sun Nov 29 2020 15:00:00 UTC
 let utc = holidaysTool.to_UTC(fecha);
-// Sun Nov 29 2020 16:00:00 GMT-0500 (hora estándar de Colombia)
+// Sun Nov 29 2020 05:00:00 GMT-0500 (hora estándar de Colombia)
+// Sun Nov 29 2020 10:00:00 UTC
 ```
 
 <a name="function_is_holiday"></a>
 
-### _is_holiday(date)_ ⇒ <code>Boolean</code>
+### _isHoliday(date)_ ⇒ <code>Boolean</code>
 
 Retorna si la fecha ingresada es un día de descanso o no; Se incluyen festivos y se toma el sábado como día de descanso.
 
@@ -77,15 +80,15 @@ Retorna si la fecha ingresada es un día de descanso o no; Se incluyen festivos 
 **Ejemplo**
 
 ```javascript
-let fecha = holidaysTool.to_UTC(new Date());
+let fecha = holidaysTool.to_utc(new Date());
 // Sun Nov 29 2020 16:00:00 GMT-0500 (hora estándar de Colombia)
-let holiday = holidaysTool.is_holiday(fecha);
+let holiday = holidaysTool.isHoliday(fecha);
 //true
 ```
 
 <a name="function_get_closest_work_day"></a>
 
-### _get_closest_work_day(date,increment<code>?</code>)_ ⇒ <code>Date</code>
+### _getClosestWorkDay(date,direction<code>?</code>)_ ⇒ <code>Date</code>
 
 Retorna el día laboral más cercano a una fecha.
 
@@ -95,35 +98,34 @@ Retorna el día laboral más cercano a una fecha.
 | Param | Type | Description |
 | --- | --- | --- |
 | date | <code>Date</code> | Fecha a calcular el día laboral más cercano.|
-| increment<code>='+'</code> | <code>+ ó -</code> | Calcular el día laboral más cercano anterior o posterior; Por defecto es el día posterior más cercano (+).|
+| direction| <code>+, -</code> | Calcular el día laboral más cercano anterior o posterior; Por defecto es el día posterior más cercano (+).|
 
 **Ejemplo**
 
 ```javascript
-let fecha = holidaysTool.to_UTC(new Date());
+let fecha = holidaysTool.to_utc(new Date());
 // Sun Nov 29 2020 16:00:00 GMT-0500 (hora estándar de Colombia)
 
-let diaAnterior = holidaysTool.get_closest_work_day(fecha,'-');
+let diaAnterior = holidaysTool._getClosestWorkDay(fecha,'-');
 // Fri Nov 27 2020 16:00:00 GMT-0500 (hora estándar de Colombia)
 
-let diaPosterior = holidaysTool.get_closest_work_day(fecha);
+let diaPosterior = holidaysTool._getClosestWorkDay(fecha);
 // Mon Nov 30 2020 16:00:00 GMT-0500 (hora estándar de Colombia)
 ```
 
 <a name="function_get_N_working_day"></a>
 
-### _get_N_working_day(quantDays,date,increment<code>?</code>)_ ⇒ <code>Date</code>
+### _addBussinessDays(date,amount)_ ⇒ <code>Date</code>
 
-Retorna el _n_ día laboral anterior o posterior; Solo contando días laborales, no días de descanso.
+Suma o resta _n_ dias laborales.
 
 **Kind**: Inner method of <code>[colombia-holidays-tool](#module_colombia-holidays-tool)</code>  
-**Returns**: <code>Date</code> - _n_ día laboral según la fecha ingresada.
+**Returns**: <code>Date</code> - Fecha despues de sumar o restar los días laborales.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| quantDays | <code>Number</code> | _n_ número de día laborales.|
 | date | <code>Date</code> | Fecha a calcular.|
-| increment<code>='-'</code> | <code>+ ó -</code> | Incremento posterior (+) o anterior (-); Por defecto es un incremento anterior(-).|
+| amount|<code>number</code> | Cantidad de días a sumar o restar.|
 
 **Ejemplo**
 
@@ -147,6 +149,19 @@ let diaPosterior = holidaysTool.get_N_working_day(2,fecha,'+');
 ```
 
 # [Changelog]
+
+El changelog del projecto puede encontrarse en el archivo [CHANGELOG.md] en la ruta principal de este repositorio.
+
+<a name="authors"></a>
+
+# Authors
+
+1. **Esteban Vanegas. [@esvanegas](https://github.com/esvanegas)**
+
+<br>
+
+_*Made with ❤️ at Storage Availability Solutions*_
+
 [Introducción]: #introduction
 [Instalación]: #instalation
 [Documentación]: #documentation
@@ -155,3 +170,5 @@ let diaPosterior = holidaysTool.get_N_working_day(2,fecha,'+');
 [get_closest_work_day]:#function_get_closest_work_day
 [get_N_working_day]:#function_get_N_working_day
 [Changelog]: ./CHANGELOG.md
+[CHANGELOG.md]: ./CHANGELOG.md
+[Authors]:#authors
