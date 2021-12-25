@@ -1,8 +1,10 @@
-name: Test
+name: Test on different timezones and node versions
 
 on:
   push:
-    branches: [ development, 'feature/**', 'release/**', 'master' ]
+    branches: [ development, 'feature/**', 'release/**', 'main' ]
+  pull_request:
+    branches: [development, 'feature/**', 'release/**', 'main' ]
 
 jobs:
 
@@ -10,14 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x,15.x,16.x]
+        node-version: [10.x, 12.x, 14.x,15.x,16.x,17.x]
+        timezones: ['America/Bogota','Etc/UTC']
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: szenius/set-timezone@v1.0
       with:
-        timezoneLinux: "America/Bogota"
+        timezoneLinux: ${{ matrix.timezones }}
     - run: date
     - run: yarn install
     - run: yarn test

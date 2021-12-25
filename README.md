@@ -7,7 +7,6 @@
 1. [Introducción]
 2. [Instalación]
 3. [Documentación]
-    * _[to_UTC]_
     * _[is_holiday]_
     * _[get_closest_work_day]_
     * _[get_N_working_day]_
@@ -39,30 +38,6 @@ const holidaysTool = require('colombia-holidays-tool');
 <a name="documentation"></a>
 
 ## Documentación
-
-<a name="function_to_utc"></a>
-
-### _to_UTC(date)_ ⇒ <code>Date</code>
-
-Retorna la fecha en formato UTC pero con el timezone actual.
-
-**Kind**: Inner method of <code>[colombia-holidays-tool](#module_colombia-holidays-tool)</code>  
-**Returns**: <code>Date</code> - Fecha UTC conservando timezone.
-
-| Param | Type | Description |
-| --- | --- | --- |
-| date | <code>Date</code> | Fecha a convertir en UTC.|
-
-**Ejemplo**
-
-```javascript
-let fecha = new Date();
-// Sun Nov 29 2020 10:00:00 GMT-0500 (hora estándar de Colombia)
-// Sun Nov 29 2020 15:00:00 UTC
-let utc = holidaysTool.to_UTC(fecha);
-// Sun Nov 29 2020 05:00:00 GMT-0500 (hora estándar de Colombia)
-// Sun Nov 29 2020 10:00:00 UTC
-```
 
 <a name="function_is_holiday"></a>
 
@@ -165,7 +140,6 @@ _*Made with ❤️ at Storage Availability Solutions*_
 [Introducción]: #introduction
 [Instalación]: #instalation
 [Documentación]: #documentation
-[to_UTC]:#function_to_utc
 [is_holiday]:#function_is_holiday
 [get_closest_work_day]:#function_get_closest_work_day
 [get_N_working_day]:#function_get_N_working_day
