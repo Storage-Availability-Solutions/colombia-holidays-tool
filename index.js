@@ -1,19 +1,5 @@
+const spacetime = require('spacetime');
 const nequiHolidays = require('colombia-holidays');
-const {zonedTimeToUtc, utcToZonedTime} = require('date-fns-tz');
-const {isSameDay, isWeekend, addDays} = require('date-fns');
-
-/**
- * Date to UTC time
- *
- * @param {Date} date           - Date to convert
- * @returns {Date}              - UTC date
- * @example
- * const date = new Date('2020-01-01 05:00:00') // => Fri Jan 01 2020 05:00:00 GMT-0500 (Colombian Time);
- * to_utc(date) // => Fri Jan 01 2020 00:00:00 GMT-0500 (Colombian Time) or Fri Jan 01 2020 05:00:00 UTC;
- */
-const to_utc = date => {
-  return utcToZonedTime(new Date(date), 'Etc/UTC');
-};
 
 /**
  * Is the date a colombian holiday?
@@ -21,17 +7,14 @@ const to_utc = date => {
  * @param {Date} date             - Date to check
  * @returns {Boolean}             - True if the date is a holiday
  */
-const isHoliday = (date, timezone = 'America/Bogota') => {
-  const utc_date = to_utc(date);
-  const holidays = nequiHolidays.getColombiaHolidaysByYear(
-    utc_date.getFullYear(),
-  );
+const isHoliday = date => {
+  const newDate = toColombianTimezoneDate(date);
+  const holidays = nequiHolidays.getColombiaHolidaysByYear(newDate.year());
   const result = holidays.filter(({holiday}) => {
-    let dateHoliday = to_utc(new Date(holiday));
-    let zonedTime = zonedTimeToUtc(new Date(date), timezone);
-    return isSameDay(zonedTime, dateHoliday);
+    const dateHoliday = toColombianTimezoneDate(new Date(holiday));
+    return newDate.isSame(dateHoliday, 'date');
   });
-  return isWeekend(utc_date) || result.length > 0;
+  return isWeekend(newDate) || result.length > 0;
 };
 
 /**
@@ -42,12 +25,12 @@ const isHoliday = (date, timezone = 'America/Bogota') => {
  * @returns {Date}                     - Closest working day
  */
 const getClosestWorkDay = (date, direction = '+') => {
-  let utc_date = to_utc(date);
+  let newDate = toColombianTimezoneDate(date);
   const dayToAdd = direction === '+' ? 1 : -1;
   do {
-    utc_date = addDays(utc_date, dayToAdd);
-  } while (isHoliday(utc_date));
-  return utc_date;
+    newDate = newDate.add(dayToAdd, 'day');
+  } while (isHoliday(newDate.d));
+  return newDate.d;
 };
 
 /**
@@ -58,18 +41,40 @@ const getClosestWorkDay = (date, direction = '+') => {
  * @returns {Date}                  - Date with bussiness days added
  */
 const addBussinessDays = (date, amount) => {
-  let utc_date = to_utc(date);
+  let newDate = toColombianTimezoneDate(date);
   const dayToAdd = amount > 0 ? 1 : -1;
-  while (amount + dayToAdd !== 0) {
-    utc_date = getClosestWorkDay(utc_date, amount > 0 ? '+' : '-');
+  while (amount * dayToAdd > 0) {
+    const closestWorkDay = getClosestWorkDay(newDate.d, amount > 0 ? '+' : '-');
+    newDate = toColombianTimezoneDate(closestWorkDay);
     amount -= dayToAdd;
   }
-  return utc_date;
+  return newDate.d;
+};
+
+/**
+ * Date to Colombia timezone
+ * @param {Date} date                  - Date to convert
+ * @returns {spacetime}                - Date in Colombia timezone
+ */
+const toColombianTimezoneDate = date => {
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth() + 1;
+  const year = date.getUTCFullYear();
+  return spacetime(`${year}-${month}-${day}`, 'America/Bogota');
+};
+
+/**
+ * Is the date a weekend?
+ * @param {spacetime} spacetimeDate     - Date to check
+ * @returns {Boolean}                   - True if the date is a weekend
+ */
+const isWeekend = spacetimeDate => {
+  const dayOfWeek = spacetimeDate.day();
+  return dayOfWeek === 0 || dayOfWeek === 6;
 };
 
 module.exports = {
   isHoliday,
   getClosestWorkDay,
   addBussinessDays,
-  to_utc,
 };
