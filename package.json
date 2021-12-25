@@ -1,6 +1,6 @@
 {
   "name": "@storage-availability-solutions/colombia-holidays-tool",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Herramienta para trabajar con días laborales en Colombia",
   "main": "index.js",
   "scripts": {
@@ -18,10 +18,10 @@
   "homepage": "https://github.com/Storage-Availability-Solutions/colombia-holidays-tool#readme",
   "dependencies": {
     "colombia-holidays": "^0.0.1",
-    "date-fns": "^2.23.0",
-    "date-fns-tz": "^1.1.6"
+    "spacetime": "^6.16.3"
   },
   "devDependencies": {
+    "date-fns": "^2.27.0",
     "jest": "^26.6.3"
   }
 }
