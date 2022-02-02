@@ -2,9 +2,9 @@ name: Test on different timezones and node versions
 
 on:
   push:
-    branches: [ development, 'feature/**', 'release/**', 'main' ]
+    branches: [ develop, 'feature/**', 'release/**', 'main' ]
   pull_request:
-    branches: [development, 'feature/**', 'release/**', 'main' ]
+    branches: [develop, 'feature/**', 'release/**', 'main' ]
 
 jobs:
 
