@@ -91,6 +91,19 @@ describe('getClosestWorkDay', () => {
     const expected = toColombianTimezoneDate(new Date('2021-12-13'));
     expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
   });
+  it('Get closest positive work day from 31/01/2022 - Should return 01/02/2022', () => {
+    const closestWorkDay = getClosestWorkDay(new Date('2022-01-31 10:00:00'));
+    const expected = toColombianTimezoneDate(new Date('2022-02-01'));
+    expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
+  });
+  it('Get closest negative work day from 31/01/2022 - Should return 28/01/2022', () => {
+    const closestWorkDay = getClosestWorkDay(
+      new Date('2022-01-31 10:00:00'),
+      '-',
+    );
+    const expected = toColombianTimezoneDate(new Date('2022-01-28'));
+    expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
+  });
 });
 
 describe('addBussinessDays', () => {
@@ -142,6 +155,16 @@ describe('addBussinessDays', () => {
   it('Add 1 work day to 11/12/2021 - Should return 13/12/2021', () => {
     const closestWorkDay = addBussinessDays(new Date('2021-12-11 5:00:00'), 1);
     const expected = toColombianTimezoneDate(new Date('2021-12-13'));
+    expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
+  });
+  it('Add 1 work day to 31/01/2022 - Should return 01/02/2022', () => {
+    const closestWorkDay = addBussinessDays(new Date('2022-01-31'), 1);
+    const expected = toColombianTimezoneDate(new Date('2022-02-01'));
+    expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
+  });
+  it('Substract 1 work day to 31/01/2022 - Should return 28/01/2022', () => {
+    const closestWorkDay = addBussinessDays(new Date('2022-01-31'), -1);
+    const expected = toColombianTimezoneDate(new Date('2022-01-28'));
     expect(isSameDay(closestWorkDay, expected.d)).toEqual(true);
   });
 });
